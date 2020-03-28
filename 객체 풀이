@@ -1,0 +1,157 @@
+Main.java
+
+import java.util.Scanner;
+
+public class Main {
+
+    private static void mShowMenu(){
+        System.out.println("1. 도어락 열기");
+        System.out.println("2. 도어락 비밀번호 초기화");
+        System.out.println("3. 집 너비 구하기");
+        System.out.println("4. 집 부피 구하기");
+    }
+
+    public static void main(String[] args) {
+        PersonalHouse mYewonHouse = new PersonalHouse(15, 10, "YewonHouse", "1124");
+
+        Scanner scan = new Scanner(System.in);
+        int command;
+        do{
+            mShowMenu();
+            command = scan.nextInt();
+
+            switch(command){
+                case 1 :
+                    // TODO 도어락 열기
+                    scan.nextLine();
+                    String password = scan.nextLine();
+                    System.out.println(password);
+                    mYewonHouse.mDoorLock(password);
+
+                    break;
+                case 2 :
+                    // TODO 도어락 비밀번호 초기화
+                    String nowPassword, newPassword;
+                    scan.nextLine();
+                    nowPassword = scan.nextLine();
+
+
+                    newPassword = scan.nextLine();
+
+                    mYewonHouse.mPasswordFormat(nowPassword, newPassword);
+                    break;
+                case 3:
+                    // TODO 집 너비 구하기
+                    System.out.println(String.valueOf(mYewonHouse.getWidth()));
+                    break;
+
+                case 4 :
+                    // TODO 집 부피 구하기
+                    System.out.println("이 집의 부피는 " + String.valueOf(mYewonHouse.getVolume()) + "입니다.");
+
+                    break;
+                default:
+                    System.out.println("해당 커맨드가 존재하지 않습니다. 프로그램을 종료합니다.");
+                    break;
+            }
+
+        }while(1<=command && command<=4);
+
+
+    }
+}
+
+
+House.java
+
+public class House {
+
+    private int mWidth, mHeight, mVolume;
+    private boolean mLightStatus;
+    private String mHouseName;
+
+    //생성자 메소드
+    public House(int width, int height, String name){
+        this(width, height, name, false);
+    }
+    //생성자 메소드
+    public House(int width, int height, String name, boolean lightStatus){
+        this.mWidth = width;
+        this.mHeight = height;
+        this.mHouseName = name;
+        this.mLightStatus = lightStatus;
+    }
+
+    //getter
+    public int getWidth(){
+        return this.mWidth;
+    }
+
+    public int getVolume(){
+      return this.mWidth * this.mWidth *this.mHeight;
+    }
+
+    //setter
+    public void setWidth(int width){
+        this.mWidth = width;
+
+    }
+
+    public void mWalkMethod(){
+        System.out.println("뚜벅 뚜벅");
+    }
+
+    public void mOnOffLight(){
+        if(this.mLightStatus == true){
+            System.out.println("불을 끕니다.");
+            this.mLightStatus = false;
+        }else if(this.mLightStatus == false){
+            System.out.println("불을 켭니다.");
+            this.mLightStatus = true;
+        }
+    }
+
+    public void mDropWater(){
+        System.out.println("물을 내립니다.");
+    }
+}
+
+
+PersonalHouse.java
+
+public class PersonalHouse extends House{
+
+    private String mPassword;
+
+    public PersonalHouse(int width, int height, String name, String password){
+        super(width,height,name);
+
+        this.mPassword = password;
+    }
+
+    public boolean mDoorLock(String password){
+        if(this.mPassword.equals(password) == true){
+            System.out.println("비밀번호가 일치합니다.");
+            return true;
+        }else{
+            System.out.println("비밀번호가 일치하지 않습니다.");
+            return false;
+        }
+    }
+
+    public int getVolume(){
+      return super.getVolume();
+    }
+    public boolean mPasswordFormat(String nowPassword, String newPassword){
+        if(mPassword.equals(nowPassword) == true){
+            System.out.println("비밀번호가 일치하여 새로운 비밀번호로 변경되었습니다.");
+            mPassword = newPassword;
+
+            return true;
+        }else {
+            System.out.println("비밀번호가 틀립니다.");
+            return false;
+        }
+    }
+    
+}
