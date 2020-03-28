@@ -10,6 +10,14 @@ import java.util.Scanner;
 
       return sumVal;
     }
+
+
+    public static int recursiveSunMethod(int n){
+      if(n == 1){return 1;}
+      return recursiveSunMethod(n-1) + n;
+    }
+
+
     public static void main(String[] args) {
       
       Scanner scan = new Scanner(System.in);
