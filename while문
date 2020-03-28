@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+  class Main {
+    public static void main(String[] args) {
+      
+      Scanner scan = new Scanner(System.in);
+      int n, i = 1, sumVal = 0;
+
+      n = scan.nextInt();
+
+      while(i<=n){
+        sumVal += i;
+        i++;
+      } 
+
+      System.out.println("1~" + String.valueOf(n) + "까지의 합 = " + String.valueOf(sumVal));
+      
+    }
+  }
